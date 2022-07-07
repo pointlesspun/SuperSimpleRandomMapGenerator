@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-/**
- * Unity Behavior wrapper around the RectangleDivisionService, generating a game object for
- * each rectangle created by this service.
- */
+
+/// <summary>
+/// Unity Behavior wrapper around the RectangleDivisionService, generating a game object for
+/// each rectangle created by this service.
+/// </summary>
 public class LayoutGenerator : MonoBehaviour
 {
     /// <summary>
@@ -36,6 +37,16 @@ public class LayoutGenerator : MonoBehaviour
     /// Returns the generated layout
     /// </summary>
     public List<RectangleNode2DBehaviour> Layout => _layout;
+
+    /// <summary>
+    /// Cached context used to communicate data to the various transformations
+    /// </summary>
+    private LayoutContext _context = new LayoutContext();
+
+    /// <summary>
+    /// Object in the hierarchy which will contain all the tiles
+    /// </summary>
+    private GameObject _tileParent;
 
     /// <summary>
     /// Convenience event callback for ui elements which generates a layout, then applies
@@ -72,12 +83,9 @@ public class LayoutGenerator : MonoBehaviour
     {
         if (_transformations != null && _transformations.Length > 0)
         {
-            var context = new LayoutContext()
-            {
-                bounds = _rectangle,
-                layout = _layout,
-                config = _configuration
-            };
+            _context.layoutContainer = gameObject;
+            _context.bounds = _rectangle;
+            _context.layout = _layout;
 
             foreach (var transform in _transformations)
             {
@@ -85,7 +93,7 @@ public class LayoutGenerator : MonoBehaviour
                 {
                     if ((layoutTransform.ApplyTransformation & stage) == stage)
                     {
-                        layoutTransform.Apply(context);
+                        layoutTransform.Apply(_context);
                     }
                 }
                 else
@@ -176,9 +184,15 @@ public class LayoutGenerator : MonoBehaviour
         var offset = Vector3.zero;
         var result = new List<RectangleNode2DBehaviour>();
 
+        if (_tileParent == null)
+        {
+            _tileParent = new GameObject("Tiles");
+            _tileParent.transform.SetParent(transform, false);
+        }
+
         foreach (var layoutNode in layout)
         {
-            var rectangleBehaviour = CreateGameObjectAndRectangleBehaviour(layoutNode, offset, config);
+            var rectangleBehaviour = CreateGameObjectAndRectangleBehaviour(layoutNode, offset, config, _tileParent);
             result.Add(rectangleBehaviour);
         }
 
@@ -195,7 +209,8 @@ public class LayoutGenerator : MonoBehaviour
     private RectangleNode2DBehaviour CreateGameObjectAndRectangleBehaviour(
         RectangleNode2D<GameObject> layoutNode, 
         in Vector3 offset, 
-        LayoutConfiguration config)
+        LayoutConfiguration config,
+        GameObject parent)
     {
         var tile = Instantiate(_prefab);
         var rectangleBehaviour = tile.AddComponent<RectangleNode2DBehaviour>();
@@ -206,7 +221,7 @@ public class LayoutGenerator : MonoBehaviour
         tile.transform.position = new Vector3(tileRect.center.x, tileRect.center.y, 0) + offset;
         tile.transform.localScale = new Vector3(tileRect.width - config.padding, tileRect.height - config.padding, 1);
 
-        tile.transform.SetParent(transform, false);
+        tile.transform.SetParent(parent.transform, false);
 
         layoutNode.Data = rectangleBehaviour.gameObject;
         rectangleBehaviour.node = layoutNode;

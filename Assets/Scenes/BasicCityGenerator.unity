@@ -636,13 +636,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefab: {fileID: 8912580459592579940, guid: 051c0f77277d83d4c99e6d99a31fce75, type: 3}
   _rectangle:
-    x: -82
-    y: -75
-    width: 164
-    height: 150
+    x: -16
+    y: -16
+    width: 32
+    height: 32
   _configuration:
     minDepth: 1
-    maxDepth: 10
+    maxDepth: 12
     minRectWidth: 2
     minRectHeight: 2
     nodeDefaultValue: {fileID: 0}
@@ -651,6 +651,7 @@ MonoBehaviour:
   _transformations:
   - {fileID: 11400000, guid: 4e2a127f69b0a164f830f4a129ac4db1, type: 2}
   - {fileID: 11400000, guid: f0abf36eda03463428cab0c1aac89468, type: 2}
+  - {fileID: 11400000, guid: 3a8a21ac8cae8ea44b6305e94940c350, type: 2}
 --- !u!4 &1545502163
 Transform:
   m_ObjectHideFlags: 0
@@ -660,7 +661,7 @@ Transform:
   m_GameObject: {fileID: 1545502161}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -691,7 +692,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 547f18fb4973be04e99abb5cd4369d75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iterations: 2
   iterationDelay: 0.1
 --- !u!1 &1624024332
 GameObject:

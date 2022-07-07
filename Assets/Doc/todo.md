@@ -5,14 +5,6 @@
 ### In Progress
 
 -   Write high level documentation
--   Create Tlines connections to neighbors instead direct lines 
-    - Draw Tlines (done)
-    - Add Tline datastructure to layout so it can be used outside the gizmos
-        rectA,
-        rectB,
-        Intersectionline,
-        projectionPoint A,
-        projectionPoint B,
 
 ### Planned
 -   Add seed option to LayoutGenerator so the generated map can be controlled
@@ -23,10 +15,20 @@
     -   Demo with transformations applied
 
 -   Basic unit tests
+-   Make all members start with _
 
 ### Done
 
 -   Add option to Transformations to indicate when to apply (after each iterating, afterCompletion).
+-   Create Tlines connections to neighbors instead direct lines 
+    - Draw Tlines 
+    - Add Tline datastructure to layout so it can be used outside the gizmos
+        rectA,
+        rectB,
+        Intersectionline,
+        projectionPoint A,
+        projectionPoint B,
+    - Add lines in game view (see https://docs.unity3d.com/Manual/class-LineRenderer.html)
 
 ### Dismissed / Later
 

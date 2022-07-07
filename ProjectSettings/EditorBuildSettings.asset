@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/BasicCityGenerator.unity
+    guid: 7caa7580e97a838459c87358a79cc83e
   m_configObjects: {}

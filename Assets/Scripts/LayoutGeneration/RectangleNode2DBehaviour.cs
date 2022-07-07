@@ -38,7 +38,7 @@ public class RectangleNode2DBehaviour : MonoBehaviour
         var scale = transform.parent != null ? transform.parent.transform.localScale : Vector3.one;
         var pi1 = new Vector3(intersection[0].x, intersection[0].y, 0);
         var pi2 = new Vector3(intersection[1].x, intersection[1].y, 0);
-        var pp = GetProjectionPoint(node.Rectangle.center, intersection);
+        var pp = Connector.GetProjectionPoint(node.Rectangle.center, intersection);
 
         pi1 = transform.rotation * Vector3.Scale(pi1, scale);
         pi2 = transform.rotation * Vector3.Scale(pi2, scale);
@@ -46,29 +46,6 @@ public class RectangleNode2DBehaviour : MonoBehaviour
 
         Gizmos.DrawLine(transform.position, pp);
         Gizmos.DrawLine(pp, pi1 + ((pi2 - pi1) * 0.5f));
-    }
-
-    /// <summary>
-    /// Gets a point from the center of the given axis aligned line projected on
-    /// the line orthogonal to the line. 
-    /// </summary>
-    /// <param name="center"></param>
-    /// <param name="line"></param>
-    /// <returns></returns>
-    private Vector3 GetProjectionPoint(in Vector2 center, Vector2Int[] line)
-    {
-        if (line[0].x == line[1].x)
-        {
-            float centerY = line[0].y;
-            centerY += (line[1].y - line[0].y) * 0.5f;
-            return new Vector3(center.x, centerY, 0);
-        }
-        else
-        {
-            float centerX = line[0].x;
-            centerX += (line[1].x - line[0].x) * 0.5f;
-            return new Vector3(centerX, center.y, 0);
-        }
-    }
+    }  
 }
 
