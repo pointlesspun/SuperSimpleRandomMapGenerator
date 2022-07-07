@@ -12,11 +12,12 @@
     -   Demo with just the algorithm
     -   Demo with transformations applied
 -   Create TShape connections to neighbors instead direct lines
--   Add option to Transformations to indicate when to apply (after each iterating, afterCompletion).
 -   find a pretty sky box (eg https://assetstore.unity.com/packages/3d/simple-sky-cartoon-assets-42373)
 -   Basic unit tests
 
 ### Done
+
+-   Add option to Transformations to indicate when to apply (after each iterating, afterCompletion).
 
 ## v2.0: City
 

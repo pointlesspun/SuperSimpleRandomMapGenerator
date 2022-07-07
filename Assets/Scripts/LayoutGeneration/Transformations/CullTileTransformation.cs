@@ -17,6 +17,15 @@ public class CullTileTransformation : ScriptableObject, ILayoutTransformation
     /// </summary>
     public float cullChance = 0.1f;
 
+    // backing field for ApplyTransformation 
+    public TransformationStage _stage = TransformationStage.Complete;
+
+    /// <summary>
+    /// When to apply the transformation.
+    /// </summary>
+    public TransformationStage ApplyTransformation { get => _stage; set => _stage = value; }
+
+
     /// <summary>
     ///  Randomly cull tiles from the given context' layout according to the parameters defined in this transformation.
     /// </summary>

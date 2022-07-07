@@ -68,7 +68,7 @@ public class LayoutGenerator : MonoBehaviour
     /// <summary>
     /// Apply all transformations to LayoutGenerator.Layout and returns the result.
     /// </summary>
-    public List<RectangleNode2DBehaviour> ApplyTransformations()
+    public List<RectangleNode2DBehaviour> ApplyTransformations(TransformationStage stage = TransformationStage.Complete)
     {
         if (_transformations != null && _transformations.Length > 0)
         {
@@ -83,7 +83,10 @@ public class LayoutGenerator : MonoBehaviour
             {
                 if (transform != null && transform is ILayoutTransformation layoutTransform)
                 {
-                    layoutTransform.Apply(context);
+                    if ((layoutTransform.ApplyTransformation & stage) == stage)
+                    {
+                        layoutTransform.Apply(context);
+                    }
                 }
                 else
                 {

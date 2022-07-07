@@ -72,14 +72,10 @@ public class IterativeLayoutGenerator : MonoBehaviour
                 // update the layout for 2 steps
                 _generator.UpdateLayout(_iterationConfig);
                 _currentIteration += 2;
+                _isActive = _currentIteration < _generator._configuration.maxDepth; 
 
-                // done ?
-                if (_currentIteration >= _generator._configuration.maxDepth)
-                {
-                    // apply the post transformations.
-                    _generator.ApplyTransformations();
-                    _isActive = false;
-                }
+                // apply the transformations.
+                _generator.ApplyTransformations(_isActive ? TransformationStage.Iteration : TransformationStage.Complete);
 
                 _startTime = Time.time;
             }
