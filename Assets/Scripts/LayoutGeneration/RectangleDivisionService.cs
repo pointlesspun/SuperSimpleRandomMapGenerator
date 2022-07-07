@@ -10,7 +10,6 @@ public static class RectangleDivisionService
     // preallocated buffer which holds two rects
     private static RectInt[] _rectangleBuffer = new RectInt[2];
 
-
     /// <summary>
     /// Divides the given rectangle according to the given configuration
     /// </summary>

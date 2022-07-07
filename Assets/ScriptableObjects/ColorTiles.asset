@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd205dae6e676014586fb4cec912a9bb, type: 3}
   m_Name: ColorTiles
   m_EditorClassIdentifier: 
-  fallbackColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  colors:
+  _fallbackColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _colors:
   - {r: 0.40175894, g: 0.4528302, b: 0.37379852, a: 1}
   - {r: 0.48985845, g: 0.5849056, b: 0.43867922, a: 1}
   - {r: 0.5336418, g: 0.6981132, b: 0.44455323, a: 1}
   - {r: 0.5372033, g: 0.7830189, b: 0.40258992, a: 1}
-  markTilesWithNoNeigbors: 1
-  noNeighborColor: {r: 1, g: 0, b: 0, a: 1}
+  _markTilesWithNoNeigbors: 1
+  _noNeighbourColor: {r: 0, g: 0.5882353, b: 1, a: 1}
+  _stage: -1

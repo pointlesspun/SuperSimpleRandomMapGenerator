@@ -132,5 +132,31 @@ public static class RectangleExtensions
                || (c < 0 || d < 0)
                || e >= 2;
     }
+
+    /// <summary>
+    /// Gets an intersection line between two rectangles. There are three possible outcomes:
+    /// 
+    /// * v1.x == v2.x or v1.y == v2.y, rectangles touch on a side 
+    /// * v1.x > v2.x or v1.y > v2.y, rectangles are disjunct
+    /// * none of the above applies and v1.x != v2.x or v1.y != v2.y, rectangles intersect 
+    /// 
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
+    /// <returns></returns>
+    public static Vector2Int[] GetIntersection(this in RectInt a, in RectInt b)
+    {
+        var x1 = Mathf.Max(a.min.x, b.min.x);
+        var x2 = Mathf.Min(a.max.x, b.max.x);
+
+        var y1 = Mathf.Max(a.min.y, b.min.y);
+        var y2 = Mathf.Min(a.max.y, b.max.y);
+
+        return new Vector2Int[]
+        {
+                new Vector2Int(x1, y1),
+                new Vector2Int(x2, y2),
+        };
+    }
 }
 
