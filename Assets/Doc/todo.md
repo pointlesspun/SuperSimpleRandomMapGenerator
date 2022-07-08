@@ -12,12 +12,11 @@
     -   Add step
     -   Demo with just the algorithm
     -   Demo with transformations applied
-
--   Basic unit tests
--   Make all members start with _
+- Create readme.md for github and setup git pages (rename old readme to technotes.md)
 
 ### Done
 
+-   Make all members start with _
 -   Add seed option to LayoutGenerator so the generated map can be controlled
 -   Add option to Transformations to indicate when to apply (after each iterating, afterCompletion).
 -   Create Tlines connections to neighbors instead direct lines 
@@ -35,9 +34,17 @@
 -   find a pretty sky box (eg https://assetstore.unity.com/packages/3d/simple-sky-cartoon-assets-42373)
     - in the current demo you don't really see the sky box, doesn't justify including the assets
 
-## v2.0: City
+-   Basic unit tests (Delayed until v2.0(1) and v2.0(2) )
+
+## v2.0: Refactoring
 
 ### Planned
+
+-   (1) Refactor LayoutGeneration so each step is a transformation, starting with a rectangle
+-   (2) Add AABSP transformation as a start
+-   Add unit tests
+
+## v3.0: City
 
 -   Cull away from center
 -   Add blocks as if it was a city
@@ -45,7 +52,7 @@
 -   Add roads
 -   Get some nice props
 
-## v3.0: Dungeon
+## v4.0: Dungeon
 
 ### Planned
 

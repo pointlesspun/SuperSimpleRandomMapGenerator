@@ -9,17 +9,17 @@ public class Connector
     /// <summary>
     /// Rectangle A which has Rectangle B a neighbour
     /// </summary>
-    public RectangleNode2DBehaviour rectA;
+    public RectangleNode2DBehaviour _rectA;
 
     /// <summary>
     /// Rectangle B which has Rectangle A a neighbour
     /// </summary>
-    public RectangleNode2DBehaviour rectB;
+    public RectangleNode2DBehaviour _rectB;
 
     /// <summary>
     /// Line in object space making up the intersection between rectA and rectB .
     /// </summary>
-    public Vector2Int[] intersection;
+    public Vector2Int[] _intersection;
 
     /// <summary>
     /// Point in object space between Connector.rectA.center and the Connector.intersection center
@@ -29,7 +29,7 @@ public class Connector
     /// <summary>
     /// Point in in object space between Connector.rectB.center and the Connector.intersection center
     /// </summary>
-    public Vector3 projectionPointB;
+    public Vector3 _projectionPointB;
 
     /// <summary>
     /// Build a list of connectors for each RectangleNode2DBehaviour in the layout
@@ -50,7 +50,7 @@ public class Connector
                 var potentialNeighbour = layout[j];
 
                 // are the nodes neighbours ?
-                if (currentNode.node.Neighbours.Contains(potentialNeighbour.node))
+                if (currentNode._node.Neighbours.Contains(potentialNeighbour._node))
                 {
                     connections.Add(BuildConnector(currentNode, potentialNeighbour));
                 }
@@ -68,15 +68,15 @@ public class Connector
     /// <returns></returns>
     public static Connector BuildConnector(RectangleNode2DBehaviour rectA, RectangleNode2DBehaviour rectB)
     {
-        var intersection = rectA.node.Rectangle.GetIntersection(rectB.node.Rectangle);
+        var intersection = rectA._node.Rectangle.GetIntersection(rectB._node.Rectangle);
 
         return new Connector()
         {
-            rectA = rectA,
-            rectB = rectB,
-            intersection = intersection,
-            projectionPointA = GetProjectionPoint(rectA.node.Rectangle.center, intersection),
-            projectionPointB = GetProjectionPoint(rectB.node.Rectangle.center, intersection)
+            _rectA = rectA,
+            _rectB = rectB,
+            _intersection = intersection,
+            projectionPointA = GetProjectionPoint(rectA._node.Rectangle.center, intersection),
+            _projectionPointB = GetProjectionPoint(rectB._node.Rectangle.center, intersection)
         };
     }
 

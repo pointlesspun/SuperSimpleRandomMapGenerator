@@ -12,31 +12,31 @@ public class FixedRandomSeed
     /// <summary>
     /// When set to true indicates this seed should be used
     /// </summary>
-    public bool useFixedRandomSeed = false;
+    public bool _useFixedRandomSeed = false;
 
     /// <summary>
     /// See value used
     /// </summary>
-    public int seed = 42;
+    public int _seed = 42;
 
     /// <summary>
     /// Randomstate before applying the fixed random seed
     /// </summary>
-    private Random.State preApplyState;
+    private Random.State _preApplyState;
 
     /// <summary>
     /// State before restore is called
     /// </summary>
-    private Random.State postApplyState;
+    private Random.State _postApplyState;
 
     /// <summary>
     /// Flag to check if a state is captured or the seed should be used
     /// </summary>
-    private bool isPostApplyStateCaptured;
+    private bool _isPostApplyStateCaptured;
 
     public FixedRandomSeed()
     {
-        isPostApplyStateCaptured = false;
+        _isPostApplyStateCaptured = false;
     }
 
     /// <summary>
@@ -44,15 +44,15 @@ public class FixedRandomSeed
     /// </summary>
     public void Apply()
     {
-        preApplyState = Random.state;
+        _preApplyState = Random.state;
 
-        if (isPostApplyStateCaptured)
+        if (_isPostApplyStateCaptured)
         {
-            Random.state = postApplyState;
+            Random.state = _postApplyState;
         }
         else
         {
-            Random.InitState(seed);
+            Random.InitState(_seed);
         }
     }
 
@@ -61,7 +61,7 @@ public class FixedRandomSeed
     /// </summary>
     public void TryApply()
     {
-        if (useFixedRandomSeed)
+        if (_useFixedRandomSeed)
         {
             Apply();
         }
@@ -72,9 +72,9 @@ public class FixedRandomSeed
     /// </summary>
     public void Restore()
     {
-        postApplyState = Random.state;
-        Random.state = preApplyState;
-        isPostApplyStateCaptured = true;
+        _postApplyState = Random.state;
+        Random.state = _preApplyState;
+        _isPostApplyStateCaptured = true;
     }
 
     /// <summary>
@@ -82,7 +82,7 @@ public class FixedRandomSeed
     /// </summary>
     public void TryRestore()
     {
-        if (useFixedRandomSeed)
+        if (_useFixedRandomSeed)
         {
             Restore();
         }

@@ -20,7 +20,7 @@ public static class RectangleDivisionService
     public static List<RectangleNode2D<T>> DivideRectangle<T>(in RectInt rectangle, RectangleDivisionConfiguration<T> config)
     {
         // recursively split until a stop condition has been reached
-        return Split(new List<RectangleNode2D<T>>(), CreateNode(null, rectangle, config.nodeDefaultValue), 0, config);
+        return Split(new List<RectangleNode2D<T>>(), CreateNode(null, rectangle, config._nodeDefaultValue), 0, config);
     }
 
     public static List<RectangleNode2D<T>> DivideRectangleNode<T>(RectangleNode2D<T> rectangle, RectangleDivisionConfiguration<T> config)
@@ -63,7 +63,7 @@ public static class RectangleDivisionService
         RectangleDivisionConfiguration<T> config
     )
     {
-        if (depth < config.maxDepth)
+        if (depth < config._maxDepth)
         {
             // split horizontal or vertical ?
             if (ShouldSplitVertically(depth))
@@ -111,8 +111,8 @@ public static class RectangleDivisionService
         RectangleDivisionConfiguration<T> config
     )
     {
-        var childNode1 = CreateNode(node, rectangles[0], config.nodeDefaultValue);
-        var childNode2 = CreateNode(node, rectangles[1], config.nodeDefaultValue);
+        var childNode1 = CreateNode(node, rectangles[0], config._nodeDefaultValue);
+        var childNode2 = CreateNode(node, rectangles[1], config._nodeDefaultValue);
 
         // add the two children as neighbours
         childNode1.Neighbours.Add(childNode2);

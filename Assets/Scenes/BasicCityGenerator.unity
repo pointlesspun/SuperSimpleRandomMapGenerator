@@ -648,6 +648,9 @@ MonoBehaviour:
     nodeDefaultValue: {fileID: 0}
     padding: 0.15
     tileNamePrefix: 'Tile '
+    randomSeed:
+      useFixedRandomSeed: 1
+      seed: 42
   _transformations:
   - {fileID: 11400000, guid: 4e2a127f69b0a164f830f4a129ac4db1, type: 2}
   - {fileID: 11400000, guid: f0abf36eda03463428cab0c1aac89468, type: 2}

@@ -10,12 +10,12 @@ public class CullTileTransformation : ScriptableObject, ILayoutTransformation
     /// <summary>
     /// Maximum number of tiles which are allowed to be culled, set to -1 to have no limit.
     /// </summary>
-    public int maxCulledRectangles = -1;
+    public int _maxCulledRectangles = -1;
 
     /// <summary>
     /// Chance value between 0 and 1, where 0 = no culling 1 = cull everything.
     /// </summary>
-    public float cullChance = 0.1f;
+    public float _cullChance = 0.1f;
 
     // backing field for ApplyTransformation 
     public TransformationStage _stage = TransformationStage.Complete;
@@ -33,20 +33,20 @@ public class CullTileTransformation : ScriptableObject, ILayoutTransformation
     /// <returns></returns>
     public LayoutContext Apply(LayoutContext context)
     {
-        var cullCount = maxCulledRectangles;
-        var iterations = context.layout.Count;
+        var cullCount = _maxCulledRectangles;
+        var iterations = context._layout.Count;
 
         for (var i = 0; i < iterations; i++)
         {
-            if (Random.value < cullChance)
+            if (Random.value < _cullChance)
             {
-                var index = Random.Range(0, context.layout.Count);
-                var rectBehaviour = context.layout[index];
+                var index = Random.Range(0, context._layout.Count);
+                var rectBehaviour = context._layout[index];
 
-                rectBehaviour.node.DisconnectFromNeightbours();
+                rectBehaviour._node.DisconnectFromNeightbours();
                 GameObject.Destroy(rectBehaviour.gameObject);
 
-                context.layout.RemoveAt(index);
+                context._layout.RemoveAt(index);
 
                 cullCount--;
 

@@ -18,6 +18,6 @@ MonoBehaviour:
   - {r: 0.48985845, g: 0.5849056, b: 0.43867922, a: 1}
   - {r: 0.5336418, g: 0.6981132, b: 0.44455323, a: 1}
   - {r: 0.5372033, g: 0.7830189, b: 0.40258992, a: 1}
-  _markTilesWithNoNeigbors: 1
+  _markTilesWithNoNeigbors: 0
   _noNeighbourColor: {r: 0, g: 0.5882353, b: 1, a: 1}
   _stage: -1

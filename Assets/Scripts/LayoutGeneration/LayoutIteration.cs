@@ -5,16 +5,16 @@
 /// the steps applied to the map generation.
 /// </summary>
 [RequireComponent(typeof(LayoutGenerator))]
-public class IterativeLayoutGenerator : MonoBehaviour
+public class LayoutIteration : MonoBehaviour
 {
     /// <summary>
     /// Time in between applying a division
     /// </summary>
-    public float iterationDelay = 0.7f;
+    public float _iterationDelay = 0.7f;
 
     /// <summary>
     /// Clone of the configuration of the generator but with the max depth set to
-    /// 2 so only a few divisions are applied.
+    /// 2 so only a few divisions are applied (ie one iteration).
     /// </summary>
     private LayoutConfiguration _iterationConfig;
 
@@ -60,10 +60,10 @@ public class IterativeLayoutGenerator : MonoBehaviour
 
         _iterationConfig = (LayoutConfiguration)_generator._configuration.Clone();
         _generator.ClearLayout();
-        _iterationConfig.maxDepth = 0;
+        _iterationConfig._maxDepth = 0;
         _generator.GenerateLayout(_iterationConfig);
         _currentIteration = 0;
-        _iterationConfig.maxDepth = 2;
+        _iterationConfig._maxDepth = 2;
         _isActive = true;
         _startTime = Time.time;
 
@@ -75,14 +75,14 @@ public class IterativeLayoutGenerator : MonoBehaviour
         if (_isActive)
         {
             // has a the time exceed the delay between iterations ?
-            if (Time.time - _startTime > iterationDelay)
+            if (Time.time - _startTime > _iterationDelay)
             {
                 _generator.TryApplyFixedRandomSeed();
 
                 // update the layout for 2 steps
                 _generator.UpdateLayout(_iterationConfig);
                 _currentIteration += 2;
-                _isActive = _currentIteration < _generator._configuration.maxDepth; 
+                _isActive = _currentIteration < _generator._configuration._maxDepth; 
 
                 // apply the transformations.
                 _generator.ApplyTransformations(_isActive ? TransformationStage.Iteration : TransformationStage.Complete);

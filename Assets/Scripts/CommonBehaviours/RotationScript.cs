@@ -6,10 +6,10 @@
 /// </summary>
 public class RotationScript : MonoBehaviour
 {
-    public Vector3 eulerAnglesPerSecond = Vector3.left;
+    public Vector3 _eulerAnglesPerSecond = Vector3.left;
 
     void Update()
     {
-        transform.rotation *= Quaternion.Euler(eulerAnglesPerSecond * Time.deltaTime);        
+        transform.rotation *= Quaternion.Euler(_eulerAnglesPerSecond * Time.deltaTime);        
     }
 }

@@ -38,14 +38,14 @@ public class ColorTileTransformation : ScriptableObject, ILayoutTransformation
 
     public LayoutContext Apply(LayoutContext context)
     {
-        foreach (var rectBehaviour in context.layout)
+        foreach (var rectBehaviour in context._layout)
         {
             var renderer = rectBehaviour.gameObject.GetComponent<Renderer>();
 
             if (renderer != null)
             {
 
-                if (_markTilesWithNoNeigbors && rectBehaviour.node.Neighbours.Count == 0)
+                if (_markTilesWithNoNeigbors && rectBehaviour._node.Neighbours.Count == 0)
                 {
                     renderer.material.color = _noNeighbourColor;
                 }

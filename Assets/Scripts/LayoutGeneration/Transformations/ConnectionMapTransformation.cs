@@ -46,24 +46,24 @@ public class ConnectionMapTransformation : ScriptableObject, ILayoutTransformati
     public LayoutContext Apply(LayoutContext context)
     {        
         // remove any existing line objects from the store
-        if (context.store.TryGetValue(LinesStoreName, out object lineObjects))
+        if (context._store.TryGetValue(LinesStoreName, out object lineObjects))
         {
             foreach (var obj in ((List<GameObject>)lineObjects))
             {
                 GameObject.Destroy(obj);
             }
 
-            context.store.Remove(LinesStoreName);
+            context._store.Remove(LinesStoreName);
         }
 
-        var connections = Connector.BuildLayoutConnectors(context.layout);
+        var connections = Connector.BuildLayoutConnectors(context._layout);
 
-        context.store[MapStoreName] = connections;
+        context._store[MapStoreName] = connections;
 
         // if desired, create lines to visualize the connectors
         if (_createLineObjects) 
         {
-            context.store[LinesStoreName] = CreateLineObjects(context, connections);
+            context._store[LinesStoreName] = CreateLineObjects(context, connections);
         }
 
         return context;
@@ -82,9 +82,9 @@ public class ConnectionMapTransformation : ScriptableObject, ILayoutTransformati
 
         lineObjects.Add(parentObject);
 
-        if (context.layoutContainer != null)
+        if (context._layoutContainer != null)
         {
-            parentObject.transform.SetParent(context.layoutContainer.transform, false);
+            parentObject.transform.SetParent(context._layoutContainer.transform, false);
             parentObject.transform.SetSiblingIndex(0);
         }
 
@@ -106,7 +106,7 @@ public class ConnectionMapTransformation : ScriptableObject, ILayoutTransformati
 
             line.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.TwoSided;
             
-            line.name = "line " + connector.rectA.gameObject.name + " to " + connector.rectB.gameObject.name;
+            line.name = "line " + connector._rectA.gameObject.name + " to " + connector._rectB.gameObject.name;
         }
 
         return lineObjects;
@@ -121,10 +121,10 @@ public class ConnectionMapTransformation : ScriptableObject, ILayoutTransformati
     {
         var result = new Vector3[4];
 
-        result[0] = connection.rectA.node.Rectangle.center;
+        result[0] = connection._rectA._node.Rectangle.center;
         result[1] = connection.projectionPointA;
-        result[2] = connection.projectionPointB;
-        result[3] = connection.rectB.node.Rectangle.center;
+        result[2] = connection._projectionPointB;
+        result[3] = connection._rectB._node.Rectangle.center;
 
         result[0] += _offset;
         result[1] += _offset;

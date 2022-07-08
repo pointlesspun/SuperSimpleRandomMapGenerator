@@ -56,12 +56,12 @@ public class LayoutGenerator : MonoBehaviour
     public void OnGenerateLayout()
     {
         // see if a fixed random seed needs to be applied
-        _configuration.randomSeed.TryApply();
+        _configuration._randomSeed.TryApply();
 
         GenerateLayout();
         ApplyTransformations();
 
-        _configuration.randomSeed.TryRestore();
+        _configuration._randomSeed.TryRestore();
 
     }
 
@@ -90,9 +90,9 @@ public class LayoutGenerator : MonoBehaviour
     {
         if (_transformations != null && _transformations.Length > 0)
         {
-            _context.layoutContainer = gameObject;
-            _context.bounds = _rectangle;
-            _context.layout = _layout;
+            _context._layoutContainer = gameObject;
+            _context._bounds = _rectangle;
+            _context._layout = _layout;
 
             foreach (var transform in _transformations)
             {
@@ -113,9 +113,9 @@ public class LayoutGenerator : MonoBehaviour
         return Layout;
     }
 
-    public void TryApplyFixedRandomSeed() => _configuration.randomSeed.TryApply();
+    public void TryApplyFixedRandomSeed() => _configuration._randomSeed.TryApply();
 
-    public void TryRestoreRandomState() => _configuration.randomSeed.TryRestore();
+    public void TryRestoreRandomState() => _configuration._randomSeed.TryRestore();
 
     /// <summary>
     /// Updates the LayoutGenerator.Layout using the given configuration.
@@ -139,14 +139,14 @@ public class LayoutGenerator : MonoBehaviour
 
         foreach (var rectBehaviour in layout)
         {
-            var rect = rectBehaviour.node.Rectangle;
+            var rect = rectBehaviour._node.Rectangle;
             
             if (config.CanDivide(rect))
             {                
-                var nodeLayout = CreateLayoutObjects(RectangleDivisionService.DivideRectangleNode(rectBehaviour.node, config), config);
+                var nodeLayout = CreateLayoutObjects(RectangleDivisionService.DivideRectangleNode(rectBehaviour._node, config), config);
                 updatedLayout.AddRange(nodeLayout);
 
-                rectBehaviour.node.DisconnectFromNeightbours();
+                rectBehaviour._node.DisconnectFromNeightbours();
                 GameObject.Destroy(rectBehaviour.gameObject);             
             }
             else
@@ -175,7 +175,7 @@ public class LayoutGenerator : MonoBehaviour
         {
             foreach (var rectangle in layout)
             {
-                rectangle.node.DisconnectFromNeightbours();
+                rectangle._node.DisconnectFromNeightbours();
                 GameObject.Destroy(rectangle.gameObject);
             }
 
@@ -227,15 +227,15 @@ public class LayoutGenerator : MonoBehaviour
         var rectangleBehaviour = tile.AddComponent<RectangleNode2DBehaviour>();
         var tileRect = layoutNode.Rectangle;
 
-        tile.name = config.tileNamePrefix + tileRect.ToString();
+        tile.name = config._tileNamePrefix + tileRect.ToString();
 
         tile.transform.position = new Vector3(tileRect.center.x, tileRect.center.y, 0) + offset;
-        tile.transform.localScale = new Vector3(tileRect.width - config.padding, tileRect.height - config.padding, 1);
+        tile.transform.localScale = new Vector3(tileRect.width - config._padding, tileRect.height - config._padding, 1);
 
         tile.transform.SetParent(parent.transform, false);
 
         layoutNode.Data = rectangleBehaviour.gameObject;
-        rectangleBehaviour.node = layoutNode;
+        rectangleBehaviour._node = layoutNode;
 
         return rectangleBehaviour;
     }
