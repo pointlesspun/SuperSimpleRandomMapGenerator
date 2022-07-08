@@ -7,7 +7,6 @@
 -   Write high level documentation
 
 ### Planned
--   Add seed option to LayoutGenerator so the generated map can be controlled
 
 -   Create demo page
     -   Add step
@@ -19,6 +18,7 @@
 
 ### Done
 
+-   Add seed option to LayoutGenerator so the generated map can be controlled
 -   Add option to Transformations to indicate when to apply (after each iterating, afterCompletion).
 -   Create Tlines connections to neighbors instead direct lines 
     - Draw Tlines 

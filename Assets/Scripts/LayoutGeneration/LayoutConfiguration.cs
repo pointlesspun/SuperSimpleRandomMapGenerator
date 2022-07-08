@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+
+
 /// <summary>
 /// Configuration which adds additional properties
 /// </summary>
@@ -15,4 +17,11 @@ public class LayoutConfiguration : RectangleDivisionConfiguration<GameObject>
     /// Prefix applied to the generated object's name
     /// </summary>
     public string tileNamePrefix = "Tile ";
+
+    /// <summary>
+    /// Indication whether or not we're using a predefined seed to have predictable 
+    /// map generation.
+    /// </summary>
+    public FixedRandomSeed randomSeed;
+
 }

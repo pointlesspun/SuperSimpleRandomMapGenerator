@@ -42,8 +42,12 @@ public class IterativeLayoutGenerator : MonoBehaviour
     public void Start()
     {
         _generator = GetComponent<LayoutGenerator>();
+
+        _generator.TryApplyFixedRandomSeed();
         _generator.GenerateLayout();
         _generator.ApplyTransformations();
+        _generator.TryRestoreRandomState();
+
         _isActive = false;
     }
 
@@ -52,6 +56,8 @@ public class IterativeLayoutGenerator : MonoBehaviour
     /// </summary>
     public void OnGenerateLayout()
     {
+        _generator.TryApplyFixedRandomSeed();
+
         _iterationConfig = (LayoutConfiguration)_generator._configuration.Clone();
         _generator.ClearLayout();
         _iterationConfig.maxDepth = 0;
@@ -60,6 +66,8 @@ public class IterativeLayoutGenerator : MonoBehaviour
         _iterationConfig.maxDepth = 2;
         _isActive = true;
         _startTime = Time.time;
+
+        _generator.TryRestoreRandomState();
     }
 
     public void Update()
@@ -69,6 +77,8 @@ public class IterativeLayoutGenerator : MonoBehaviour
             // has a the time exceed the delay between iterations ?
             if (Time.time - _startTime > iterationDelay)
             {
+                _generator.TryApplyFixedRandomSeed();
+
                 // update the layout for 2 steps
                 _generator.UpdateLayout(_iterationConfig);
                 _currentIteration += 2;
@@ -78,6 +88,8 @@ public class IterativeLayoutGenerator : MonoBehaviour
                 _generator.ApplyTransformations(_isActive ? TransformationStage.Iteration : TransformationStage.Complete);
 
                 _startTime = Time.time;
+
+                _generator.TryRestoreRandomState();
             }
         }
     }

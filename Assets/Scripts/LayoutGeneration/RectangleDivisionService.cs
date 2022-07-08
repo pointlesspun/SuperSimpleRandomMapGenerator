@@ -23,7 +23,7 @@ public static class RectangleDivisionService
         return Split(new List<RectangleNode2D<T>>(), CreateNode(null, rectangle, config.nodeDefaultValue), 0, config);
     }
 
-    public static List<RectangleNode2D<T>> DivideRectangle<T>(RectangleNode2D<T> rectangle, RectangleDivisionConfiguration<T> config)
+    public static List<RectangleNode2D<T>> DivideRectangleNode<T>(RectangleNode2D<T> rectangle, RectangleDivisionConfiguration<T> config)
     {
         // recursively split until a stop condition has been reached
         return Split(new List<RectangleNode2D<T>>(), rectangle, 0, config);

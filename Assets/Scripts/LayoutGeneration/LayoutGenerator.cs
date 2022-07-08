@@ -2,6 +2,7 @@
 using UnityEngine;
 
 
+
 /// <summary>
 /// Unity Behavior wrapper around the RectangleDivisionService, generating a game object for
 /// each rectangle created by this service.
@@ -54,8 +55,14 @@ public class LayoutGenerator : MonoBehaviour
     /// </summary>
     public void OnGenerateLayout()
     {
+        // see if a fixed random seed needs to be applied
+        _configuration.randomSeed.TryApply();
+
         GenerateLayout();
         ApplyTransformations();
+
+        _configuration.randomSeed.TryRestore();
+
     }
 
     /// <summary>
@@ -72,7 +79,7 @@ public class LayoutGenerator : MonoBehaviour
     public List<RectangleNode2DBehaviour> GenerateLayout(LayoutConfiguration config)
     {
         ClearLayout(_layout);
-        _layout = CreateLayoutObjects(RectangleDivisionService.DivideRectangle(_rectangle, config), config);     
+        _layout = CreateLayoutObjects(RectangleDivisionService.DivideRectangle(_rectangle, config), config);       
         return _layout;
     }
 
@@ -106,6 +113,10 @@ public class LayoutGenerator : MonoBehaviour
         return Layout;
     }
 
+    public void TryApplyFixedRandomSeed() => _configuration.randomSeed.TryApply();
+
+    public void TryRestoreRandomState() => _configuration.randomSeed.TryRestore();
+
     /// <summary>
     /// Updates the LayoutGenerator.Layout using the given configuration.
     ///The update applies the rectangle division algorithm to each rectangle/tile in the LayoutGenerator.Layout.
@@ -132,7 +143,7 @@ public class LayoutGenerator : MonoBehaviour
             
             if (config.CanDivide(rect))
             {                
-                var nodeLayout = CreateLayoutObjects(RectangleDivisionService.DivideRectangle(rectBehaviour.node, config), config);
+                var nodeLayout = CreateLayoutObjects(RectangleDivisionService.DivideRectangleNode(rectBehaviour.node, config), config);
                 updatedLayout.AddRange(nodeLayout);
 
                 rectBehaviour.node.DisconnectFromNeightbours();
