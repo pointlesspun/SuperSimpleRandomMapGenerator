@@ -4,6 +4,14 @@
 
 ### In Progress
 
+
+### Planned
+
+-   Create readme.md for github and setup git pages (rename old readme to technotes.md)
+-   Add link in the demos to the github pages
+
+### Done
+
 -   Write high level documentation
 -   Create demo page
     -   001 introduction to the demo format (description, layout in the background, create scene, next buttons)
@@ -13,13 +21,6 @@
     -   003 color transformation
     -   004 cull transformation
     -   005 connectors transformation
-### Planned
-
--   Create readme.md for github and setup git pages (rename old readme to technotes.md)
--   Add link to the demos
-
-### Done
-
 -   Make all members start with _
 -   Add seed option to LayoutGenerator so the generated map can be controlled
 -   Add option to Transformations to indicate when to apply (after each iterating, afterCompletion).
@@ -36,7 +37,7 @@
 ### Dismissed / Later
 
 -   find a pretty sky box (eg https://assetstore.unity.com/packages/3d/simple-sky-cartoon-assets-42373)
-    - in the current demo you don't really see the sky box, doesn't justify including the assets
+    - in the current demo you don't really see the sky box, doesn't justify including the assets at this point
 
 -   Basic unit tests (Delayed until v2.0(1) and v2.0(2) )
 
