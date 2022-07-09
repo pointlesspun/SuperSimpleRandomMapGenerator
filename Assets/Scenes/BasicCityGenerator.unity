@@ -641,16 +641,16 @@ MonoBehaviour:
     width: 32
     height: 32
   _configuration:
-    minDepth: 1
-    maxDepth: 12
-    minRectWidth: 2
-    minRectHeight: 2
-    nodeDefaultValue: {fileID: 0}
-    padding: 0.15
-    tileNamePrefix: 'Tile '
-    randomSeed:
-      useFixedRandomSeed: 1
-      seed: 42
+    _minDepth: 1
+    _maxDepth: 12
+    _minRectWidth: 2
+    _minRectHeight: 2
+    _nodeDefaultValue: {fileID: 0}
+    _padding: 0.1
+    _tileNamePrefix: 'Tile '
+    _randomSeed:
+      _useFixedRandomSeed: 0
+      _seed: 42
   _transformations:
   - {fileID: 11400000, guid: 4e2a127f69b0a164f830f4a129ac4db1, type: 2}
   - {fileID: 11400000, guid: f0abf36eda03463428cab0c1aac89468, type: 2}
@@ -682,7 +682,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e53438810f8e9754fa821f2e18f3cc87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eulerAnglesPerSecond: {x: 0, y: 0, z: 2}
+  _eulerAnglesPerSecond: {x: 0, y: 0, z: 5}
 --- !u!114 &1545502165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -695,7 +695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 547f18fb4973be04e99abb5cd4369d75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iterationDelay: 0.1
+  _iterationDelay: 0.2
 --- !u!1 &1624024332
 GameObject:
   m_ObjectHideFlags: 0

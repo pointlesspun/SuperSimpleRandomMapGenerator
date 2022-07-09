@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 835e547fdc8eebe42b1fa8ca425462dc, type: 3}
   m_Name: ConnectionMap
   m_EditorClassIdentifier: 
-  _stage: -1
   _createLineObjects: 1
-  _lineWidth: 0.025
+  _lineWidth: 0.1
   _lineMaterial: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
-  _offset: {x: 0, y: 0, z: -0.1}
+  _offset: {x: 0, y: 0, z: -0.3}
+  _stage: -1

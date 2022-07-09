@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2471a5a658fe26459187d8d9f1c0da6, type: 3}
   m_Name: CullLayout
   m_EditorClassIdentifier: 
-  maxCulledRectangles: -1
-  cullChance: 0.35
+  _maxCulledRectangles: -1
+  _cullChance: 0.2
   _stage: 2

@@ -43,12 +43,7 @@ public class LayoutIteration : MonoBehaviour
     {
         _generator = GetComponent<LayoutGenerator>();
 
-        _generator.TryApplyFixedRandomSeed();
-        _generator.GenerateLayout();
-        _generator.ApplyTransformations();
-        _generator.TryRestoreRandomState();
-
-        _isActive = false;
+        OnGenerateLayout();
     }
 
     /// <summary>

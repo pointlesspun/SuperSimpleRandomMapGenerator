@@ -5,14 +5,18 @@
 ### In Progress
 
 -   Write high level documentation
-
+-   Create demo page
+    -   001 introduction to the demo format (description, layout in the background, create scene, next buttons)
+    -   002 iterative generation ( In progress)
+        - Add prev/next scene buttons & scene loader script
+        - Add version number in the top
+    -   003 color transformation
+    -   004 cull transformation
+    -   005 connectors transformation
 ### Planned
 
--   Create demo page
-    -   Add step
-    -   Demo with just the algorithm
-    -   Demo with transformations applied
-- Create readme.md for github and setup git pages (rename old readme to technotes.md)
+-   Create readme.md for github and setup git pages (rename old readme to technotes.md)
+-   Add link to the demos
 
 ### Done
 
@@ -36,13 +40,15 @@
 
 -   Basic unit tests (Delayed until v2.0(1) and v2.0(2) )
 
-## v2.0: Refactoring
+## v2.0: Refactoring & Bugfixing
 
 ### Planned
 
--   (1) Refactor LayoutGeneration so each step is a transformation, starting with a rectangle
--   (2) Add AABSP transformation as a start
--   Add unit tests
+-   Add warning if no prefab is defined in the layout generator.
+-   Gizmos are not drawn correctly when the object containing the layout generator is moved.
+-   (1) Refactor LayoutGeneration so each step is a transformation, starting with a rectangle.
+-   (2) Add AABSP transformation as a start.
+-   Add unit tests.
 
 ## v3.0: City
 

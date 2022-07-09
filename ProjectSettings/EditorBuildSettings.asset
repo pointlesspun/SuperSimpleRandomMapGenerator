@@ -6,6 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/BasicCityGenerator.unity
-    guid: 7caa7580e97a838459c87358a79cc83e
+    path: Assets/Scenes/001_IterativeLayoutGeneration.unity
+    guid: e765ccd8611216b43983e2bb1d8a6521
+  - enabled: 1
+    path: Assets/Scenes/002_IterativeLayoutGeneration.unity
+    guid: 723af0fd17f5a1a4ba7ec0e0d4951cb5
+  - enabled: 1
+    path: Assets/Scenes/003_ColorTransformation.unity
+    guid: f5273c03d63689a429051ff106743f1f
+  - enabled: 1
+    path: Assets/Scenes/004_MultipleTransformations.unity
+    guid: 231de696455e87045877cdfd88433344
+  - enabled: 1
+    path: Assets/Scenes/005_CreatingNewData.unity
+    guid: 64368ad4dcbcf454a8843fa1346b01ac
   m_configObjects: {}

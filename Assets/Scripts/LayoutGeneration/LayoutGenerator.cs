@@ -25,19 +25,24 @@ public class LayoutGenerator : MonoBehaviour
     public LayoutConfiguration _configuration;
 
     /// <summary>
+    /// Generate a layout when the behaviour is started
+    /// </summary>
+    public bool _createLayoutAtStartUp = true;
+
+    /// <summary>
     /// List of transformations to be applied after the layout has been constructed.
     /// </summary>
     public ScriptableObject[] _transformations;
+    
+    /// <summary>
+    /// Returns the generated layout
+    /// </summary>
+    public List<RectangleNode2DBehaviour> Layout => _layout;
 
     /// <summary>
     /// Generated layout
     /// </summary>
     private List<RectangleNode2DBehaviour> _layout = null;
-
-    /// <summary>
-    /// Returns the generated layout
-    /// </summary>
-    public List<RectangleNode2DBehaviour> Layout => _layout;
 
     /// <summary>
     /// Cached context used to communicate data to the various transformations
@@ -48,6 +53,14 @@ public class LayoutGenerator : MonoBehaviour
     /// Object in the hierarchy which will contain all the tiles
     /// </summary>
     private GameObject _tileParent;
+
+    public void Start()
+    {
+        if (_createLayoutAtStartUp)
+        {
+            OnGenerateLayout();
+        }
+    }
 
     /// <summary>
     /// Convenience event callback for ui elements which generates a layout, then applies
