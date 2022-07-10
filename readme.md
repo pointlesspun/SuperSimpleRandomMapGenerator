@@ -1,8 +1,10 @@
 
 Unity project which is trying to deliver a simple mechanism to build random maps.
 
-Github Pages:
-(https://pointlesspun.github.io/SuperSimpleRandomMapGenerator/)[https://pointlesspun.github.io/SuperSimpleRandomMapGenerator/]
+The current version is 0.01. 
 
-Demos:
-(https://pointlesspun.github.io/SuperSimpleRandomMapGenerator/Web)[https://pointlesspun.github.io/SuperSimpleRandomMapGenerator/Web]
+[Github Project Page](https://github.com/pointlesspun/SuperSimpleRandomMapGenerator)
+
+[Github Pages](https://pointlesspun.github.io/SuperSimpleRandomMapGenerator/)
+
+[Demos](https://pointlesspun.github.io/SuperSimpleRandomMapGenerator/Web)

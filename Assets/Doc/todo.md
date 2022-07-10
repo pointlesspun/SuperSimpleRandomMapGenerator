@@ -7,8 +7,6 @@
 
 ### Planned
 
--   Create readme.md for github and setup git pages (rename old readme to technotes.md)
--   Add link in the demos to the github pages
 
 ### Done
 
@@ -33,6 +31,11 @@
         projectionPoint A,
         projectionPoint B,
     - Add lines in game view (see https://docs.unity3d.com/Manual/class-LineRenderer.html)
+
+-   Create readme.md for github and setup git pages (rename old readme to technotes.md)
+
+-   Add link in the demos to the github pages
+
 
 ### Dismissed / Later
 
