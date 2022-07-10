@@ -24,72 +24,84 @@ public class AABSP
 
         public int Depth { get; set; }
 
-        public Axis DetermineSplitAxis(int maxDepth, int minRectWidth, int minRectHeight)
+        public Axis DetermineSplitAxis(int minRectWidth, int minRectHeight)
         {
-            if (Depth < maxDepth)
+            
+            if (SplitAxis == Axis.Horizontal)
             {
-                if (SplitAxis == Axis.Horizontal)
+                // prefer to split along the other axis if possible
+                if (Rectangle.width >= minRectWidth)
                 {
-                    // prefer to split along the other axis if possible
-                    if (Rectangle.width >= minRectWidth)
-                    {
-                        return Axis.Vertical;
-                    }
-                    // try to see if another horizontal split is possible
-
-                    if (Rectangle.height >= minRectHeight)
-                    {
-                        return Axis.Horizontal;
-                    }
+                    return Axis.Vertical;
                 }
-                else if (SplitAxis == Axis.Vertical)
+                // try to see if another horizontal split is possible
+
+                if (Rectangle.height >= minRectHeight)
                 {
-                    // prefer to split along the other axis if possible
-                    if (Rectangle.height >= minRectHeight)
-                    {
-                        return Axis.Horizontal;
-                    }
-
-                    // try to see if another horizontal split is possible
-                    if (Rectangle.width >= minRectWidth)
-                    {
-                        return Axis.Vertical;
-                    }
-
+                    return Axis.Horizontal;
                 }
+            }
+            else if (SplitAxis == Axis.Vertical)
+            {
+                // prefer to split along the other axis if possible
+                if (Rectangle.height >= minRectHeight)
+                {
+                    return Axis.Horizontal;
+                }
+
+                // try to see if another horizontal split is possible
+                if (Rectangle.width >= minRectWidth)
+                {
+                    return Axis.Vertical;
+                }
+
             }
 
             return Axis.None;
         }
     }
 
-    public static AABSP GenerateRandomTree(in RectInt rect, int maxDepth, int minRectWidth, int minRectHeight, int maxIterations)
+    public static AABSP GenerateRandomTree(in RectInt rect, int minRectWidth, int minRectHeight, int maxDepth = -1, int maxIterations = -1)
     {
         var result = new AABSP(rect, Random.value > 0.5 ? Axis.Horizontal : Axis.Vertical);
         return GenerateRandomTree(result, maxDepth, minRectWidth, minRectHeight, maxIterations);
     }
 
-    public static AABSP GenerateRandomTree(AABSP tree, int maxDepth, int minRectWidth, int minRectHeight, int maxIterations)
+    public static AABSP GenerateRandomTree(AABSP tree, int minRectWidth, int minRectHeight, int maxDepth = -1, int maxIterations = -1)
     {
         var iteration = 0;
+        var nodeIndex = 0;
 
-        while (tree.LeafNodes.Count > 0 && iteration < maxIterations)
+        while (tree.LeafNodes.Count > 0 
+                && nodeIndex < tree.LeafNodes.Count
+                && (maxIterations < 0 || iteration < maxIterations))
         {
-            var lastIndex = tree.LeafNodes.Count - 1;
-            var node = tree.LeafNodes[lastIndex];
-            var splitAxis = node.DetermineSplitAxis(maxDepth, minRectWidth, minRectHeight);
+            var node = tree.LeafNodes[nodeIndex];
 
-            if (splitAxis != Axis.None)
+            // can we develop this node? If the max depth has been reached for this node
+            // we skip this node
+            if (node.Depth < maxDepth || maxDepth < 0)
             {
-                var size = Random.Range(0, splitAxis == Axis.Horizontal ? node.Rectangle.width : node.Rectangle.height);
-                
-                tree.Split(node, splitAxis, size);
-                tree.LeafNodes.Add(node.Left);
-                tree.LeafNodes.Add(node.Right);
-            }
+                var splitAxis = node.DetermineSplitAxis(minRectWidth, minRectHeight);
 
-            tree.LeafNodes.Remove(node);
-            iteration++;
+                // if the axis is none the node cannot be divided any further, so do not split
+                // it and remove it from the open list
+                if (splitAxis != Axis.None)
+                {
+                    var size = Random.Range(1, splitAxis == Axis.Horizontal ? node.Rectangle.width : node.Rectangle.height);
+
+                    tree.Split(node, splitAxis, size);
+                    tree.LeafNodes.Add(node.Left);
+                    tree.LeafNodes.Add(node.Right);
+                }
+
+                tree.LeafNodes.RemoveAt(0);
+                iteration++;
+            } 
+            else
+            {
+                nodeIndex++;
+            }           
         }
 
         return tree;
@@ -108,6 +120,7 @@ public class AABSP
 
         LeafNodes.Add(Root);
     }
+
 
     public Node Split(Node node, Axis axis, int size)
     {
