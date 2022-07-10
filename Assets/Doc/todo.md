@@ -2,6 +2,10 @@
 
 ## v2.0: Refactoring & Bugfixing
 
+## In progress
+-   Create AABSP
+-   Add unit tests.
+
 ### Planned
 
 -   Add warning if no prefab is defined in the layout generator.
@@ -9,7 +13,7 @@
 -   (1) Refactor LayoutGeneration so each step is a transformation, starting with a rectangle.
 -   (2) Add AABSP transformation as a start.
 -   Should be able to set the number of divisions to any number (not necessarily even). To do so track the 'depth' in the AABSP.
--   Add unit tests.
+
 
 - Add demo for AABSP.
 
