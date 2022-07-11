@@ -75,13 +75,13 @@ public class AABSP
             if (SplitAxis == Axis.Horizontal)
             {
                 // prefer to split along the other axis if possible
-                if (Rectangle.width > minRectWidth)
+                if (Rectangle.width/2 >= minRectWidth)
                 {
                     return Axis.Vertical;
                 }
                 // try to see if another horizontal split is possible
 
-                if (allowSplitOnEitherAxis && Rectangle.height > minRectHeight)
+                if (allowSplitOnEitherAxis && Rectangle.height/2 >= minRectHeight)
                 {
                     return Axis.Horizontal;
                 }
@@ -89,13 +89,13 @@ public class AABSP
             else if (SplitAxis == Axis.Vertical)
             {
                 // prefer to split along the other axis if possible
-                if (Rectangle.height > minRectHeight)
+                if (Rectangle.height/2 >= minRectHeight)
                 {
                     return Axis.Horizontal;
                 }
 
                 // try to see if another horizontal split is possible
-                if (allowSplitOnEitherAxis && Rectangle.width > minRectWidth)
+                if (allowSplitOnEitherAxis && Rectangle.width/2 >= minRectWidth)
                 {
                     return Axis.Vertical;
                 }
@@ -121,10 +121,10 @@ public class AABSP
     /// <param name="allowSplitOnEitherAxis">Allow splitting over the other axis if the width or height 
     /// constraint cannot be met.</param>
     /// <returns>A non null randomly split tree</returns>
-    public static AABSP GenerateRandomTree(in RectInt rect, int minRectWidth, int minRectHeight, int maxDepth = -1, int maxIterations = -1, bool allowSplitOnEitherAxis = true)
+    public static AABSP GenerateRandomTree(in RectInt rect, int minRectWidth = 1, int minRectHeight = 1, int maxDepth = -1, int maxIterations = -1, bool allowSplitOnEitherAxis = true)
     {
         var result = new AABSP(rect, Random.value > 0.5 ? Axis.Horizontal : Axis.Vertical);
-        return GenerateRandomTree(result, maxDepth, minRectWidth, minRectHeight, maxIterations, allowSplitOnEitherAxis);
+        return GenerateRandomTree(result, minRectWidth, minRectHeight, maxDepth, maxIterations, allowSplitOnEitherAxis);
     }
 
     /// <summary>
@@ -138,7 +138,7 @@ public class AABSP
     /// <param name="allowSplitOnEitherAxis">Allow splitting over the other axis if the width or height 
     /// constraint cannot be met.</param>
     /// <returns>A non null randomly split tree</returns>
-    public static AABSP GenerateRandomTree(AABSP tree, int minRectWidth, int minRectHeight, int maxDepth = -1, int maxIterations = -1, bool allowSplitOnEitherAxis = true)
+    public static AABSP GenerateRandomTree(AABSP tree, int minRectWidth = 1, int minRectHeight = 1, int maxDepth = -1, int maxIterations = -1, bool allowSplitOnEitherAxis = true)
     {
         var iteration = 0;
         var nodeIndex = 0;
@@ -159,7 +159,9 @@ public class AABSP
                 // it and remove it from the open list
                 if (splitAxis != Axis.None)
                 {
-                    var size = Random.Range(1, splitAxis == Axis.Horizontal ? node.Rectangle.height : node.Rectangle.width);
+                    var minSize = splitAxis == Axis.Horizontal ? minRectHeight : minRectWidth;
+                    var maxSize = splitAxis == Axis.Horizontal ? node.Rectangle.height - minRectHeight : node.Rectangle.width - minRectWidth;
+                    var size = Random.Range(minSize, maxSize);
 
                     tree.Split(node, splitAxis, size);
                     tree.OpenNodes.Add(node.Left);
@@ -221,6 +223,22 @@ public class AABSP
     {
         return MaxDepth(1, Root);
     }
+
+    public int NodeCount()
+    {
+        return NodeCount(Root);
+    }
+
+    private int NodeCount(Node node)
+    {
+        if (node != null)
+        {
+            return NodeCount(node.Left) + NodeCount(node.Right) + 1;
+        }
+
+        return 0;
+    }
+
 
     private int MaxDepth(int currentDepth, Node node)
     {
