@@ -3,6 +3,7 @@
 ## v2.0: Refactoring & Bugfixing
 
 ## In progress
+- Everything below is more or less done. Need to figure out how to make Transformations / Scriptable objects stateless.
 -   Create AABSP
 -   Add unit tests.
 -   Add a flag to the AABSP signalling whether or not any size constraint violation should stop
@@ -10,14 +11,16 @@
     And options should be added that a node can only be developed it the node's width AND height is below the
     threshold.
 -   Add a data field to the BSP nodes.
+-   Add factory creating a layout based on the AABSP
+-   Create a version of the layout generator which just takes transformations (named eg TransformationStream)
+
 
 ### Planned
 
 -   Add point lookup to the AABSP.
 -   Add rect lookup to the AABSP.
 -   Add circle lookup to the AABSP.
--   Add factory creating a layout based on the AABSP
--   Create a version of the layout generator which just takes transformations (named eg TransformationStream)
+
 -   Add Serializable to the AABSP
 
 -   Add warning if no prefab is defined in the layout generator.
